@@ -108,7 +108,20 @@ static u64 load_binary(struct cap_group *cap_group, struct vmspace *vmspace,
                         seg_sz = elf->p_headers[i].p_memsz;
                         p_vaddr = elf->p_headers[i].p_vaddr;
                         /* LAB 3 TODO BEGIN */
-
+                        seg_map_sz = ROUND_UP(p_vaddr + seg_sz, PAGE_SIZE)
+                                     - ROUND_DOWN(p_vaddr, PAGE_SIZE);
+                        pmo_cap[i] = create_pmo(
+                                seg_map_sz, PMO_DATA, cap_group, &pmo);
+                        memcpy((void *)(phys_to_virt(pmo->start)
+                                        + (p_vaddr
+                                           - ROUND_DOWN(p_vaddr, PAGE_SIZE))),
+                               bin + elf->p_headers[i].p_offset,
+                               elf->p_headers[i].p_filesz);
+                        flags = PFLAGS2VMRFLAGS(elf->p_headers[i].p_flags);
+                        ret = vmspace_map_range(
+                                vmspace, p_vaddr, seg_map_sz, flags, pmo);
+                        if (ret != 0)
+                                goto out_free_cap;
                         /* LAB 3 TODO END */
                         BUG_ON(ret != 0);
                 }
@@ -399,7 +412,13 @@ void sys_thread_exit(void)
         printk("\nBack to kernel.\n");
 #endif
         /* LAB 3 TODO BEGIN */
+        int cpuid = smp_get_cpu_id();
+        struct thread *target = current_threads[cpuid];
 
+        target->thread_ctx->state = TS_EXIT;
+        obj_free(target);
+
+        current_threads[cpuid] = NULL;
         /* LAB 3 TODO END */
         printk("Lab 3 hang.\n");
         while (1) {
