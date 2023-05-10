@@ -63,6 +63,7 @@ struct inode {
 	u64 type;
 	size_t size; 
 	unsigned int mode;
+	// 一个文件或目录不能同时包含内容和索引信息
 	union {
 		struct htable dentries;
 		struct radix data;
