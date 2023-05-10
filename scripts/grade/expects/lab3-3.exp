@@ -7,7 +7,6 @@ proc print {msg} {
 
 set timeout 10
 log_user 0
-
 spawn bash -c "make qemu"
 set qemu_pid [exp_pid -i $spawn_id]
 
