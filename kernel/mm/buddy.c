@@ -230,7 +230,8 @@ u64 get_free_mem_size_from_buddy(struct phys_mem_pool *pool)
                 total_size += list->nr_free * current_order_size;
 
                 /* debug : print info about current order */
-                // kdebug("buddy memory chunk order: %d, size: 0x%lx, num: %d\n",
+                // kdebug("buddy memory chunk order: %d, size: 0x%lx, num:
+                // %d\n",
                 //        order,
                 //        current_order_size,
                 //        list->nr_free);

@@ -59,7 +59,6 @@ void do_page_fault(u64 esr, u64 fault_ins_addr)
                          * extern void backtrace(void);
                          * backtrace();
                          */
-
                         BUG_ON(ret != 0);
                 }
                 break;
