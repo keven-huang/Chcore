@@ -227,9 +227,8 @@ int tfs_namex(struct inode **dirat, const char **name, int mkdir_p)
         i = 0;
         while (**name) {
                 if (**name && **name == '/') {
-                        printf("name:%s,len:%d\n", *name, i);
+                        buff[i] = '\0';
                         dent = tfs_lookup(*dirat, buff, i);
-
                         if (dent == NULL) {
                                 if (mkdir_p) {
                                         err = tfs_mkdir(*dirat, buff, i);
@@ -241,12 +240,14 @@ int tfs_namex(struct inode **dirat, const char **name, int mkdir_p)
                         }
                         *dirat = dent->inode;
                         i = 0;
+                } else {
+                        buff[i] = **name;
+                        ++i;
                 }
-                buff[i] = **name;
-                ++i;
                 ++(*name);
         }
         // name指向filename i=0时指向'\0'
+        printf("i = %d\n", i);
         for (int j = 0; j < i; j++) {
                 --(*name);
         }
@@ -322,7 +323,7 @@ ssize_t tfs_file_write(struct inode *inode, off_t offset, const char *data,
 {
         BUG_ON(inode->type != FS_REG);
         BUG_ON(offset > inode->size);
-
+        printf("in file write\n");
         u64 page_no, page_off;
         u64 cur_off = offset;
         size_t to_write;
