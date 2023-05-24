@@ -97,6 +97,7 @@ static int lab5_stdio_file_printf_scanf () {
     FILE * pFile;
     pFile = fopen("/myfile2.txt", "w");
     fprintf(pFile, "fprintf %s %d\n", __func__, data);
+	
     fclose(pFile);
 
     int outdata;

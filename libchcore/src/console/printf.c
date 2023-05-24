@@ -15,11 +15,6 @@
 
 #define PRINT_BUF_LEN 64
 
-typedef __builtin_va_list va_list;
-#define va_start(v, l) __builtin_va_start(v, l)
-#define va_end(v)      __builtin_va_end(v)
-#define va_arg(v, l)   __builtin_va_arg(v, l)
-#define va_copy(d, s)  __builtin_va_copy(d, s)
 
 static void simple_outputchar(char **str, char c)
 {
@@ -110,7 +105,7 @@ static int simple_outputi(char **out, long long i, int base, int sign,
         return pc + prints(out, s, width, flags);
 }
 
-static int simple_vsprintf(char **out, const char *format, va_list ap)
+int simple_vsprintf(char **out, const char *format, va_list ap)
 {
         int width, flags;
         int pc = 0;

@@ -152,7 +152,6 @@ static int tfs_mknod(struct inode *dir, const char *name, size_t len, int mkdir)
         }
         /* LAB 5 TODO BEGIN */
         struct inode *t = malloc(sizeof(*inode));
-        printf("in mknod,name:%s,len = %d\n", name, len);
         inode = (mkdir == true) ? new_dir() : new_reg();
         dent = new_dent(inode, name, len);
         init_hlist_node(&dent->node);
@@ -247,11 +246,9 @@ int tfs_namex(struct inode **dirat, const char **name, int mkdir_p)
                 ++(*name);
         }
         // name指向filename i=0时指向'\0'
-        printf("i = %d\n", i);
         for (int j = 0; j < i; j++) {
                 --(*name);
         }
-        printf("exit namx name:%s\n", *name);
         /* LAB 5 TODO END */
 
         /* we will never reach here? */
@@ -323,7 +320,6 @@ ssize_t tfs_file_write(struct inode *inode, off_t offset, const char *data,
 {
         BUG_ON(inode->type != FS_REG);
         BUG_ON(offset > inode->size);
-        printf("in file write\n");
         u64 page_no, page_off;
         u64 cur_off = offset;
         size_t to_write;
@@ -408,7 +404,6 @@ int tfs_load_image(const char *start)
                 /* LAB 5 TODO BEGIN */
                 dirat = tmpfs_root;
                 leaf = f->name;
-                printf("f->name: %s\n", leaf);
                 len = strlen(leaf);
                 err = tfs_namex(&dirat, &leaf, 1);
                 if (err)

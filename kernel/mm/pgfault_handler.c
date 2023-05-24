@@ -75,9 +75,10 @@ int handle_trans_fault(struct vmspace *vmspace, vaddr_t fault_addr)
                         /* LAB 3 TODO BEGIN */
                         vaddr_t va = (vaddr_t)get_pages(0);
                         pa = virt_to_phys(va);
-                        offset = ROUND_DOWN(fault_addr, PAGE_SIZE);
+                        memset((void *)va, 0, PAGE_SIZE);
+                        commit_page_to_pmo(pmo,index,pa);
                         map_range_in_pgtbl(
-                                vmspace->pgtbl, offset, pa, PAGE_SIZE, perm);
+                                vmspace->pgtbl, fault_addr, pa, PAGE_SIZE, perm);
                         /* LAB 3 TODO END */
 #ifdef CHCORE_LAB3_TEST
                         printk("Test: Test: Successfully map for pa 0\n");
