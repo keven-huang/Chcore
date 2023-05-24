@@ -143,7 +143,7 @@ size_t fread(void *destv, size_t size, size_t nmemb, FILE *f)
         int ret;
         int len = size * nmemb / sizeof(char);
         struct ipc_msg *ipc_msg =
-                ipc_create_msg(fs_ipc_struct, sizeof(struct fs_request) + len + 2, 0);
+                ipc_create_msg(fs_ipc_struct, sizeof(struct fs_request) + len, 0);
         chcore_assert(ipc_msg);
         struct fs_request *fr = (struct fs_request *)ipc_get_msg_data(ipc_msg);
         fr->req = FS_REQ_READ;
