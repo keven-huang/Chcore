@@ -1,0 +1,71 @@
+Synthesizing 7/10 solutions
+
+=======
+Suggestion 1
+
+#define va_copy(d, s)  __builtin_va_copy(d, s)
+
+#define NULL ((void *)0)
+
+#define __printflike(fmtarg, firstvararg) \
+	__attribute__((__format__ (__printf__, fmtarg, firstvararg)))
+
+#define NULL ((void *)0)
+
+#define CONSOLE_MAX_STR_LEN 512
+
+int chcore_console_init(void);
+
+=======
+Suggestion 2
+
+#define va_copy(d, s)  __builtin_va_copy(d, s)
+
+#define CONSOLE_PUTS_MAX_LEN 128
+
+=======
+Suggestion 3
+
+#define va_copy(d, s)  __builtin_va_copy(d, s)
+
+#define CONSOLE_BUFFER_SIZE 4096
+
+void chcore_init_console(void);
+
+=======
+Suggestion 4
+
+#define va_copy(d, s)  __builtin_va_copy(d, s)
+
+#define MAX_PRINT_BUF_SIZE 256
+
+void console_init(void);
+
+=======
+Suggestion 5
+
+#define va_copy(d, s)  __builtin_va_copy(d, s)
+
+#define MAX_PRINT_BUF 1024
+
+=======
+Suggestion 6
+
+#define va_copy(d, s)  __builtin_va_copy(d, s)
+
+#define STDIN 0
+#define STDOUT 1
+#define STDERR 2
+
+#define CONSOLE_BUF_MAX 256
+
+/* The console APIs are not thread-safe */
+
+=======
+Suggestion 7
+
+#define va_copy(d, s)  __builtin_va_copy(d, s)
+
+#define CONSOLE_MAX_LINE_LEN 256
+
+void chcore_console_init(void);

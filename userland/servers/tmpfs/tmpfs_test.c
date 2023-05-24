@@ -111,6 +111,7 @@ int test_create() {
 int test_unlink() {
     tmpfs_unlink("/test_dir/tmp.txt", 0);
     if(tfs_open_path("/test_dir/tmp.txt")) {
+        printf("open tmp.txt success line 116\n");
         return -1;
     }
     tmpfs_rmdir("/test_dir/test_dir2", 0);
@@ -118,6 +119,7 @@ int test_unlink() {
     tmpfs_rmdir("/test_dir", 0);
     if(tfs_open_path("/test_dir") || tfs_open_path("/test_dir/test_dir2") 
         || tfs_open_path("/test_dir/test_dir3")) {
+            printf("open tmp.txt success line 124\n");
             return -1;
         }
 
