@@ -206,3 +206,4 @@ eret_to_thread(switch_context());
 > 练习题 16：在`userland/apps/lab4/prodcons_impl.c`中实现`producer`和`consumer`。
 
 生产者-消费模型
+PS:修改了LAB3的bug，发现了`handle_trans_fault`函数中在创建完page后没有将page加入到pmo的管理中，会导致线程切换的bug，加入commit_page_to_pmo函数
