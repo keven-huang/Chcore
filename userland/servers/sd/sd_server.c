@@ -28,27 +28,36 @@ static int sdcard_readblock(int lba, char *buffer)
 {
 	/* LAB 6 TODO BEGIN */
 	/* BLANK BEGIN */
-
+	int ret;
+	Seek(lba*BLOCK_SIZE);
+	ret = sd_Read(buffer, BLOCK_SIZE);
+	if (ret != BLOCK_SIZE)
+	{
+		return -1;
+	}
 	/* BLANK END */
 	/* LAB 6 TODO END */
-	return -1;
+	return 0;
 }
 
 static int sdcard_writeblock(int lba, const char *buffer)
 {
 	/* LAB 6 TODO BEGIN */
 	/* BLANK BEGIN */
-
+	int ret;
+	Seek(lba*BLOCK_SIZE);
+	ret = sd_Write(buffer, BLOCK_SIZE);
+	if(ret != BLOCK_SIZE)
+		return -1;
 	/* BLANK END */
 	/* LAB 6 TODO END */
-	return -1;
+	return 0;
 }
 
 void sd_dispatch(ipc_msg_t * ipc_msg, u64 client_badge)
 {
 	struct sd_ipc_data *msg;
 	int ret = 0;
-
 	msg = (struct sd_ipc_data *)ipc_get_msg_data(ipc_msg);
 	switch (msg->request) {
 	case SD_IPC_REQ_READ:

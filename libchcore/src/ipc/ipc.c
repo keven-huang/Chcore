@@ -70,6 +70,7 @@ struct ipc_struct *ipc_register_client(int server_thread_cap)
                         return 0;
                 }
         }
+        printf("[chcore]conn_cap = %d\n",conn_cap);
         ipc_struct->shared_buf = vm_config.buf_base_addr;
         ipc_struct->shared_buf_len = vm_config.buf_size;
         ipc_struct->conn_cap = conn_cap;

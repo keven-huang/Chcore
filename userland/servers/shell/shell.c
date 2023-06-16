@@ -367,7 +367,12 @@ int run_cmd(char *cmdline)
                 path[1] = '\0';
         }
         strcat(path, cmdline);
-        int ret = chcore_procm_spawn(path, &cap);
+        // printf("path: %s\n", path);
+        int pid = chcore_procm_spawn(path, &cap);
+        // printf("pid: %d\n", pid);
+        int ret;
+        ret = chcore_procm_waitpid(pid);
+        printf("ret: %d\n", ret);
         /* LAB 5 TODO END */
         return ret;
 }

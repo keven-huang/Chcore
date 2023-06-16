@@ -107,7 +107,7 @@ static void *procm_main(void *arg)
  
         int shell_cap;
         spawn("/shell.srv", &shell_cap);
-
+        
         /* Server does not exit */
         while (1) {
                 __chcore_sys_yield();

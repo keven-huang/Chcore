@@ -582,7 +582,7 @@ u64 sys_ipc_call(u32 conn_cap, struct ipc_msg *ipc_msg, u64 cap_num)
         /* LAB 4 TODO BEGIN: set arg */
         arg = conn->buf.server_user_addr;
         /* LAB 4 TODO END */
-
+        // printk("[kernel]sys_ipc_call: arg = %lx\n", arg);
         thread_migrate_to_server(conn, arg);
 
         BUG("This function should never\n");
