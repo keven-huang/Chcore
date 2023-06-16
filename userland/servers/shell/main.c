@@ -56,6 +56,7 @@ int main(int argc, char *argv[])
 #endif
 
         printf("The shell_test finish!\n");
+        // run_cmd("/sd_driver_test.bin");
         while (1) {
                 printf("\n");
                 buf = readline("$ ");
