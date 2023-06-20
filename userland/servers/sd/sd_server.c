@@ -81,7 +81,7 @@ int main(void)
 	while (!Initialize()) ;
 
 	ret = ipc_register_server(sd_dispatch);
-	printf("[SD Driver] register server value = %d\n", ret);
+	// printf("[SD Driver] register server value = %d\n", ret);
 
 	while(1) {
 		__chcore_sys_yield();

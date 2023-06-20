@@ -15,7 +15,6 @@
 
 int inner_sd_io_test()
 {
-        printf("in inner_sd_io_test\n");
         int ret;
         char buffer[BLOCK_SIZE];
 

@@ -1,6 +1,6 @@
 #include <string.h>
 #include <stdio.h>
-#include <chcore/memory.h>
+#include <malloc.h>
 
 #include "file_ops.h"
 #include "block_layer.h"
@@ -58,15 +58,6 @@ int init()
         }
 }
 
-int alloc_blk()
-{
-        do {
-                BLOCK_NUM++;
-        } while (is_blk_used(BLOCK_NUM));
-        set_blk(BLOCK_NUM, 1);
-        return BLOCK_NUM;
-}
-
 bool is_blk_used(int blknum)
 {
         // check if the block is used
@@ -89,6 +80,15 @@ void set_blk(int blknum, bool used)
                 bitmap[byte] &= ~(1 << bit);
         }
         sd_bwrite(0, bitmap);
+}
+
+int alloc_blk()
+{
+        do {
+                BLOCK_NUM++;
+        } while (is_blk_used(BLOCK_NUM));
+        set_blk(BLOCK_NUM, 1);
+        return BLOCK_NUM;
 }
 
 // dentry format --  name:bcknum1,bcknum2,;name:bcknum1,bcknum2,;
